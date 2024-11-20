@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr8s2em80ohdj"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_8o8o6"]
+[ext_resource type="Texture2D" uid="uid://dxuflqdkymy6e" path="res://TD-Player.png" id="2_u885j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axkb1"]
+radius = 20.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+process_mode = 1
+script = ExtResource("1_8o8o6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_axkb1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(12, 0)
+texture = ExtResource("2_u885j")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 7)
+target_position = Vector2(300, 0)
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 0.452
+one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(44, 7)
+emitting = false
+one_shot = true
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

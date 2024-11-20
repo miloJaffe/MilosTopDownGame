@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://iu5nwlgj1fm7"]
+
+[ext_resource type="Script" path="res://Zombie.gd" id="1_u3i8y"]
+[ext_resource type="Texture2D" uid="uid://bl4dnx2qrd1m" path="res://Zombie.png" id="2_1w0a3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fesy3"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v01g2"]
+
+[node name="Zombie" type="CharacterBody2D"]
+process_mode = 1
+script = ExtResource("1_u3i8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fesy3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+texture = ExtResource("2_1w0a3")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(40, 0)
+shape = SubResource("CircleShape2D_v01g2")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
